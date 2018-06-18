@@ -29,6 +29,7 @@ RUN apt-get update \
         php7.2-fpm \
         php7.2-cli \
         php7.2-mysql \
+        php7.2-sqlite \
         php7.2-curl \
         php7.2-intl \
         php7.2-mbstring \
