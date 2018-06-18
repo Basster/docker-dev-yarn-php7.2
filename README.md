@@ -8,6 +8,7 @@ A docker image which includes:
   - apcu
   - readline
   - mysql
+  - sqlite
   - curl
   - intl
   - mbstring
