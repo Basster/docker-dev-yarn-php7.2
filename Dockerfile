@@ -24,6 +24,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN apt-get update \
   && apt-get install -y \
         php7.2-apcu \
+        php7.2-bcmath \
         php7.2-common \
         php7.2-readline \
         php7.2-fpm \
