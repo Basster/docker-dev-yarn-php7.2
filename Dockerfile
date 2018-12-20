@@ -49,5 +49,5 @@ RUN apt-get update \
 
 # composer
 RUN cd /tmp \
-    && wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --quiet \
-    && mv composer.phar /usr/local/bin/composer
+  && curl -sS https://getcomposer.org/installer -o composer-setup.php \
+  && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
