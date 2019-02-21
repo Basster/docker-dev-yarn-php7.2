@@ -12,6 +12,7 @@ A docker image which includes:
   - sqlite
   - curl
   - intl
+  - gd
   - mbstring
   - opcache
   - json
