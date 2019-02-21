@@ -5,6 +5,7 @@ FROM debian:stretch-slim
 LABEL maintainer="oroessner@gmail.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV CHROME_BIN=/usr/bin/chromium
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget curl \
