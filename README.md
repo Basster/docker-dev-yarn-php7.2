@@ -12,6 +12,7 @@ A docker image which includes:
   - sqlite
   - curl
   - intl
+  - gd
   - mbstring
   - opcache
   - json
@@ -24,6 +25,7 @@ A docker image which includes:
 - [nodejs 8.x](https://nodejs.org)
 - [yarn](https://yarnpkg.com)
 - [composer](https://getcomposer.org/)
+- [chromium](https://www.chromium.org/) to be used as e.g. ChromeHeadless
 
 It also contains `curl`, `wget`, `gnupg2` and `git` for reasons.
 
