@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     gnupg2 \
     git \
+    libx11-xcb1 \
     bzip2
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
