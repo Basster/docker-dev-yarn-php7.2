@@ -1,3 +1,5 @@
+FROM composer:latest AS composer
+
 FROM debian:stretch-slim
 
 LABEL maintainer="oroessner@gmail.com"
@@ -9,8 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     lsb-release \
     apt-transport-https \
     ca-certificates \
-    gnupg2 \
-    git \
     bzip2
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
@@ -40,14 +40,13 @@ RUN apt-get update \
         php7.3-memcached \
         php7.3-zip \
         php7.3-xsl \
-        php7.3-imagick \
+        php7.3-gmagick \
         php7.3-xdebug \
         yarn \
         nodejs \
   && apt-get autoremove -y \
-  && apt-get clean
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # composer
-RUN cd /tmp \
-  && curl -sS https://getcomposer.org/installer -o composer-setup.php \
-  && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
