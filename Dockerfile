@@ -1,4 +1,4 @@
-FROM composer:1.8.0 AS composer
+FROM composer:latest AS composer
 
 FROM debian:stretch-slim
 
@@ -11,8 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     lsb-release \
     apt-transport-https \
     ca-certificates \
-    gnupg2 \
-    git \
     bzip2
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
@@ -43,12 +41,13 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
         php7.3-memcached \
         php7.3-zip \
         php7.3-xsl \
-        php7.3-imagick \
+        php7.3-gmagick \
         php7.3-xdebug \
         yarn \
         nodejs \
         chromium \
-  && apt-get clean
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
