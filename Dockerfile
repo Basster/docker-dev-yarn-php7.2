@@ -11,16 +11,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     lsb-release \
     apt-transport-https \
     ca-certificates \
-    bzip2
-
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-
+    bzip2 \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
     && sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' \
-
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-
     && apt-get update \
     && apt-get install -y --no-install-recommends --autoremove \
         php7.3-apcu \
