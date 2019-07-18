@@ -1,54 +1,37 @@
-FROM composer:1.8.0 AS composer
-
-FROM debian:stretch-slim
+FROM php:7.4-rc-cli
 
 LABEL maintainer="oroessner@gmail.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget curl \
-    lsb-release \
+    curl \
     apt-transport-https \
     ca-certificates \
     gnupg2 \
     git \
-    bzip2
-
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-
-    && wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
-    && sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' \
-
+    libzip-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libgraphicsmagick1-dev \
+    libxslt-dev \
+    chromium \
+    default-mysql-client \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd pdo_mysql intl zip exif opcache xsl bcmath \
+    && pecl install gmagick-2.0.5RC1 \
+    && pecl install apcu \
+    && docker-php-ext-enable gmagick apcu \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-
     && apt-get update \
-    && apt-get install -y --no-install-recommends --autoremove \
-        php7.3-apcu \
-        php7.3-bcmath \
-        php7.3-common \
-        php7.3-readline \
-        php7.3-fpm \
-        php7.3-gd \
-        php7.3-cli \
-        php7.3-mysql \
-        php7.3-sqlite \
-        php7.3-curl \
-        php7.3-intl \
-        php7.3-mbstring \
-        php7.3-opcache \
-        php7.3-json \
-        php7.3-pdo \
-        php7.3-memcached \
-        php7.3-zip \
-        php7.3-xsl \
-        php7.3-imagick \
-        php7.3-xdebug \
+    && apt-get install -y \
         yarn \
         nodejs \
-        chromium \
-  && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # composer
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1.8 /usr/bin/composer /usr/bin/composer
