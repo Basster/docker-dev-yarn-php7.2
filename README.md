@@ -4,7 +4,7 @@
 
 A docker image which includes:
 
-- [PHP 7.3](http://php.net/) with following extensions
+- [PHP 7.4](http://php.net/) with following extensions
   - apcu
   - bcmath
   - readline
@@ -31,5 +31,5 @@ It also contains `curl`, `wget`, `gnupg2` and `git` for reasons.
 You can find the image on the official [docker registry](https://hub.docker.com/r/djbasster/dev-yarn-php/)
 
 ```bash
-docker pull djbasster/dev-yarn-php:7.3
+docker pull djbasster/dev-yarn-php:7.4
 ```
