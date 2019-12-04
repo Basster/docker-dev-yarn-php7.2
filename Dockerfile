@@ -35,3 +35,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # composer
 COPY --from=composer:1.9 /usr/bin/composer /usr/bin/composer
+# wait-for-it
+COPY --from=djbasster/wait-for-it /usr/bin/wait-for-it /usr/bin/wait-for-it
