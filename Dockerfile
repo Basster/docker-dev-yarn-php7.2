@@ -33,6 +33,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+COPY custom.ini /usr/local/etc/php-fpm.d/zz_custom.ini
+
 # composer
 COPY --from=composer:1.9 /usr/bin/composer /usr/bin/composer
 # wait-for-it
